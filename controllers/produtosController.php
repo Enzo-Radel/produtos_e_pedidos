@@ -14,7 +14,7 @@ class ProdutosController extends Controller{
 
         $_REQUEST['produtos'] = $produtos;
 
-        self::view('view/produtos/index');
+        self::view('view/produtos/index', "Listar Produtos");
     }
 }
 
