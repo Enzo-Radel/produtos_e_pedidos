@@ -12,8 +12,8 @@ class Route
             $method = $uri['method'];
             $args = $uri['args'];
             //Now, the magic
-            $args ? $controller::{$method}(...$args) :
-                $controller::{$method}();
+            $args ? (new $controller)->{$method}(...$args) :
+                (new $controller)->{$method}();
         }
     }
 
