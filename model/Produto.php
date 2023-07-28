@@ -11,8 +11,17 @@ class Produto {
     // logica para salvar cliente no banco
     }
  
-    public function create() {
-    // logica para salvar cliente no banco
+    public static function create(array $atributes) {
+        $produto = new self;
+
+        $produto->id = $atributes["id"];
+        $produto->descricao = $atributes["descricao"];
+        $produto->valorVenda = $atributes["valorVenda"];
+        $produto->estoque = $atributes["estoque"];
+
+        //Adicionar no bando de dados e salvar imagens
+
+        return $produto;
     }
  
     public function update() {
@@ -25,12 +34,14 @@ class Produto {
     
     public function listAll() {
         $produtos = [];
-        // for ($i=0; $i < 5; $i++) { 
-        //     $client = new self();
-        //     $client->id = $i;
-        //     $client->nome = "produto $i";
-        //     array_push($clients, $client);
-        // }
+        for ($i=1; $i <= 5; $i++) { 
+            $produto = new self();
+            $produto->id = $i;
+            $produto->descricao = "produto $i";
+            $produto->valorVenda = $i * 10;
+            $produto->estoque = $i ** 2;
+            array_push($produtos, $produto);
+        }
 
         return $produtos;
     }
