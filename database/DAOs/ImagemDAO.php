@@ -3,14 +3,13 @@ namespace Database\DAOs;
 
 require_once __DIR__."/../DbConnection.php";
 
-class ProdutoDAO
+class ImagemDAO
 {
 
-    private string $queryCreate = "INSERT INTO produtos (id, descricao, valor_venda, estoque) VALUES (?, ?, ?, ?)";
-    private string $queryGetAll = "SELECT * FROM produtos";
-    private string $queryGetById = "SELECT * FROM produtos WHERE id=?;";
-    private string $queryUpdate = 'UPDATE produtos SET descricao=?, valor_venda=?, estoque=? WHERE id=?;';
-    private string $queryDelete = 'DELETE FROM produtos WHERE id=?;';
+    private string $queryCreate = "INSERT INTO imagens_de_produtos (nome, produto_id) VALUES (?, ?)";
+    private string $queryGetAllByProduct = "SELECT * FROM imagens_de_produtos WHERE produto_id=?";
+    private string $queryGetById = "SELECT * FROM imagens_de_produtos WHERE id=?;";
+    private string $queryDelete = 'DELETE FROM imagens_de_produtos WHERE id=?;';
 
     public function create(array $attributes)
     {
@@ -18,37 +17,31 @@ class ProdutoDAO
 
         $stmt = $conn->prepare($this->queryCreate);
 
-        $id = $attributes["id"];
-        $descricao = $conn->real_escape_string($attributes["descricao"]);
-        $valorVenda = $attributes["valorVenda"];
-        $estoque = $attributes["estoque"];
+        $nome = $conn->real_escape_string($attributes["nome"]);
+        $produto_id = $attributes["produto_id"];
 
         $stmt->bind_param(
-            "isdi",
-            $id,
-            $descricao,
-            $valorVenda,
-            $estoque
+            "si",
+            $nome,
+            $produto_id
         );
 
         if (!$stmt->execute()) die("Error: " . $this->queryCreate . "<br>" . mysqli_error($conn));
         $stmt->close();
 
-        $produto = [
-            "id"            => $id,
-            "descricao"     => $descricao,
-            "valorVenda"    => $valorVenda,
-            "estoque"       => $estoque,
+        $imagem = [
+            "nome"          => $nome,
+            "produto_id"    => $produto_id,
         ];
 
-        return $produto;
+        return $imagem;
     }
 
-    public function getAll(): array
+    public function getAllByProduct(): array
     {
         global $conn;
 
-        $stmt = $conn->prepare($this->queryGetAll);
+        $stmt = $conn->prepare($this->queryGetAllByProduct);
 
         $produtos = [];
 
@@ -70,7 +63,7 @@ class ProdutoDAO
         }
         else
         {
-            die("Error: " . $this->queryGetAll . "<br>" . mysqli_error($conn));
+            die("Error: " . $this->queryGetAllByProduct . "<br>" . mysqli_error($conn));
         }
 
         $stmt->close();
@@ -111,29 +104,6 @@ class ProdutoDAO
         $stmt->close();
         
         return $produto;
-    }
-
-    public function update(int $id, array $attributes)
-    {
-        global $conn;
-
-        $stmt = $conn->prepare($this->queryUpdate);
-
-        $descricao = $conn->real_escape_string($attributes['descricao']);
-        $valorVenda = $attributes['valorVenda'];
-        $estoque = $attributes['estoque'];
-
-        $stmt->bind_param(
-            "sdii",
-            $descricao,
-            $valorVenda,
-            $estoque,
-            $id
-        );
-
-        if (!$stmt->execute()) die("Error: " . $this->queryUpdate . "<br>" . mysqli_error($conn));
-
-        $stmt->close();
     }
 
     public function delete(int $id)

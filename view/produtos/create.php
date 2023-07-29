@@ -27,7 +27,7 @@
 
                 <div class="mt-3 col-12">
                     <label for="imagens" class="form-label">Imagens</label>
-                    <input type="file" class="form-control" name="imagens" id="imagens" multiple>
+                    <input type="file" class="form-control" name="imagens[]" id="imagens" multiple>
                 </div>
             </div>
         </div>

@@ -2,8 +2,10 @@
 namespace Models;
 
 require_once __DIR__."/../database/DAOs/ProdutoDAO.php";
+require_once __DIR__."/../database/DAOs/ImagemDAO.php";
 
 use Database\DAOs\ProdutoDAO;
+use Database\DAOs\ImagemDAO;
 
 class Produto
 {
@@ -17,16 +19,25 @@ class Produto
  
     public static function create(array $attributes)
     {
-        $produto = new self;
-
-        $produto->id = $attributes["id"];
-        $produto->descricao = $attributes["descricao"];
-        $produto->valorVenda = $attributes["valorVenda"];
-        $produto->estoque = $attributes["estoque"];
-
         $produtoDAO = new ProdutoDAO();
+        $imagemDAO = new ImagemDAO();
 
-        $produtoDAO->create($attributes);
+        $produtoData = $produtoDAO->create($attributes);
+
+        $produto = new self;
+        $produto->id            = $produtoData["id"];
+        $produto->descricao     = $produtoData["descricao"];
+        $produto->valorVenda    = $produtoData["valorVenda"];
+        $produto->estoque       = $produtoData["estoque"];
+
+        foreach ($attributes["imagens_nomes"] as $imagemNome) {
+            $imagemAttributes = [
+                "nome"          => $imagemNome,
+                "produto_id"    => $produto->id
+            ];
+
+            $imagemDAO->create($imagemAttributes);
+        }
 
         return $produto;
     }
