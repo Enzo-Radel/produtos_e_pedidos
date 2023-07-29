@@ -23,10 +23,32 @@
                 <td><?php echo $produto->estoque; ?></td>
                 <td class="d-flex">
                     <a href="/produtos/edit/<?php echo $produto->id ?>" class="btn btn-sm btn-primary me-2">Editar</a>
-                    <a href="/produtos/delete/<?php echo $produto->id ?>" class="btn btn-sm btn-danger">Excluir</a>
+                    <form action="/produtos/delete/<?php echo $produto->id ?>" method="post" class="form-delete" id="form-delete-<?php echo $produto->id ?>" onsubmit="return confirm('Quer mesmo deleter esse produto?');">
+                        <input type="hidden" name="_method" value="delete">
+                        <button type="submit" class="btn btn-sm btn-danger">Excluir</button>
+                    </form>
                 </td>
             </tr>
         <?php endforeach; ?>
     </table>
     </div>
 </div>
+
+<script>
+    formsDelete = document.querySelectorAll(".form-delete");
+
+    formsDelete.forEach(form => {
+        form.addEventListener("submit", (event) => {
+            event.preventDefault();
+            formData = new FormData(form);
+            fetch(form.getAttribute("action"), {
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded",
+                },
+                method: "delete",
+            }).then(() => {
+                window.location.reload();
+            });
+        });
+    });
+</script>

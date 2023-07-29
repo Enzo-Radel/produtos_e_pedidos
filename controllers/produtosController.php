@@ -67,7 +67,7 @@ class ProdutosController extends Controller
         $produto = Produto::find($id);
         $produto->delete();
 
-        header('Location: '. "/produtos");
+        return;
     }
 }
 
