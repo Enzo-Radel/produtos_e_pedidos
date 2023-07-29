@@ -2,26 +2,39 @@
 namespace Controllers;
 
 require_once "controllers/Controller.php";
-require_once 'model/Produto.php';
+require_once 'models/Produto.php';
 
-use Model\Produto;
+use Models\Produto;
 
-class ProdutosController extends Controller{
+class ProdutosController extends Controller
+{
 
-    public function index() {
+    public function index()
+    {
         $produto = new Produto();
-        $produtos = $produto->listAll();
+        $produtos = $produto->getAll();
 
         $_REQUEST['produtos'] = $produtos;
 
-        self::view('view/produtos/index', "Listar Produtos");
+        self::view('produtos/index', "Listar Produtos");
     }
 
-    public function create() {
-        self::view('view/produtos/create', "Criar Produto");
+    public function edit(int $id)
+    {
+        $produto = Produto::find($id);
+
+        $_REQUEST['produto'] = $produto;
+
+        self::view("produtos/edit", "Editar Produto #". $id);
     }
 
-    public function store() {
+    public function create()
+    {
+        self::view('produtos/create', "Criar Produto");
+    }
+
+    public function store()
+    {
         $data = [];
 
         $data["id"] = $_REQUEST["id"];
@@ -30,6 +43,29 @@ class ProdutosController extends Controller{
         $data["estoque"] = $_REQUEST["estoque"];
 
         $produto = Produto::create($data);
+
+        header('Location: '. "/produtos");
+    }
+
+    public function update(int $id)
+    {
+        $produto = Produto::find($id);
+
+        $data = [];
+
+        $data["descricao"] = $_REQUEST["descricao"];
+        $data["valorVenda"] = $_REQUEST["valorVenda"];
+        $data["estoque"] = $_REQUEST["estoque"];
+
+        $produto = $produto->update($data);
+
+        header('Location: '. "/produtos");
+    }
+
+    public function delete(int $id)
+    {
+        $produto = Produto::find($id);
+        $produto->delete();
 
         header('Location: '. "/produtos");
     }

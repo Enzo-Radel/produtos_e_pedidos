@@ -1,12 +1,13 @@
 <?php
 namespace Controllers;
 
-class Controller {
+class Controller
+{
 
     protected static function view($view, $title = 'Produtos e Pedidos')
     {
         $layout["title"] = $title;
-        $layout["childView"] = $view . ".php";
+        $layout["childView"] = "view/". $view . ".php";
         require_once 'view/layout.php';
     }
 }

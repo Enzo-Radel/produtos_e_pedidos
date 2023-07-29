@@ -1,13 +1,14 @@
 <?php
 
-require_once "controllers/produtosController.php";
+require_once "controllers/ProdutosController.php";
 
 class Route
 {
     public static function contentToRender() : void
     {
         $uri = self::processURI();
-        if (class_exists($uri['controller'])) {
+        if (class_exists($uri['controller']))
+        {
             $controller = $uri['controller'];
             $method = $uri['method'];
             $args = $uri['args'];
@@ -29,7 +30,8 @@ class Route
         $methodPart = self::getURI()[2] ?? '';
         $numParts = count(self::getURI());
         $argsPart = [];
-        for ($i = 3; $i < $numParts; $i++) {
+        for ($i = 3; $i < $numParts; $i++)
+        {
             $argsPart[] = self::getURI()[$i] ?? '';
         }
 
