@@ -23,30 +23,19 @@ class Imagem
         return $path;
     }
  
-    // public static function create(array $attributes)
-    // {
-    //     $produtoDAO = new ProdutoDAO();
-    //     $imagemDAO = new ImagemDAO();
+    public static function create(array $attributes)
+    {
+        $imagemDAO = new ImagemDAO();
 
-    //     $produtoData = $produtoDAO->create($attributes);
+        $imagemData = $imagemDAO->create($attributes);
 
-    //     $produto = new self;
-    //     $produto->id            = $produtoData["id"];
-    //     $produto->descricao     = $produtoData["descricao"];
-    //     $produto->valorVenda    = $produtoData["valorVenda"];
-    //     $produto->estoque       = $produtoData["estoque"];
+        $imagem = new self;
+        $imagem->id         = $imagemData["id"];
+        $imagem->nome       = $imagemData["nome"];
+        $imagem->produto_id = $imagemData["produto_id"];
 
-    //     foreach ($attributes["imagens_nomes"] as $imagemNome) {
-    //         $imagemAttributes = [
-    //             "nome"          => $imagemNome,
-    //             "produto_id"    => $produto->id
-    //         ];
-
-    //         $imagemDAO->create($imagemAttributes);
-    //     }
-
-    //     return $produto;
-    // }
+        return $imagem;
+    }
 
     // public function getAll(): array
     // {
@@ -71,21 +60,20 @@ class Imagem
     //     return $produtosModel;
     // }
 
-    // public static function find($id): self
-    // {
-    //     $produtoDAO = new ProdutoDAO();
+    public static function find($id): self
+    {
+        $imagemDAO = new ImagemDAO();
 
-    //     $produtoData = $produtoDAO->findById($id);
+        $imagemData = $imagemDAO->findById($id);
 
-    //     $produto = new self;
+        $imagem = new self;
 
-    //     $produto->id = $produtoData["id"];
-    //     $produto->descricao = $produtoData["descricao"];
-    //     $produto->valorVenda = $produtoData["valorVenda"];
-    //     $produto->estoque = $produtoData["estoque"];
+        $imagem->id = $imagemData["id"];
+        $imagem->nome = $imagemData["nome"];
+        $imagem->produto_id = $imagemData["produto_id"];
 
-    //     return $produto;
-    // }
+        return $imagem;
+    }
  
     // public function update(array $attributes)
     // {
@@ -98,19 +86,12 @@ class Imagem
     //     $produtoDAO->update($this->id, $attributes);
     // }
     
-    // public function delete()
-    // {
-    //     $produtoDAO = new ProdutoDAO();
+    public function delete()
+    {
+        $imagemDAO = new ImagemDAO();
 
-    //     $produtoDAO->delete($this->id);
-    // }
-
-    // public function getImages()
-    // {
-    //     $imagemDAO = new ImagemDAO();
-
-    //     return $imagemDAO->getAllByProduct($this->id);
-    // }
+        $imagemDAO->delete($this->id);
+    }
 }
 
 ?>
