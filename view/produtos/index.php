@@ -33,36 +33,6 @@
     </div>
 </div>
 
-<!-- <div style="
-    background-color: rgb(0,0,0,.4);
-    position: absolute;
-    top:0;
-    width: 100vw;
-    height: 100vh;
-">
-    <div class="card w-50" style="
-        position: absolute;
-        top: 50%;
-        right: 50%;
-        transform: translate(50%, -100%);
-    ">
-        <form action="/produtos/delete/<?php echo $produto->id ?>" method="post" class="form-delete" id="form-delete-<?php echo $produto->id ?>" onsubmit="return confirm('Quer mesmo deleter esse produto?');">
-            <div class="card-header bg-danger bg-gradient">
-                <h3>Excluir Produto</h3>
-            </div>
-            <div class="card-body">
-                <p class="fs-5 fw-medium">Tem certeza que deseja mesmo apagar esse produto?</p>
-            </div>
-            <div class="card-footer">
-                <div class="d-flex justify-content-center">
-                    <button class="btn btn btn-secondary">Cancelar</button>
-                    <button type="submit" class="btn btn btn-primary ms-3">Excluir</button>
-                </div>
-            </div>
-        </form>
-    </div>
-</div> -->
-
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
