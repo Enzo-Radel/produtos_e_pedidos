@@ -50,25 +50,4 @@
             });
         });
     });
-
-
-    // form.addEventListener("submit", (event) => {
-    //     event.preventDefault();
-    //     const data = {
-    //         descricao: formData.get("descricao"),
-    //         valorVenda: formData.get("valorVenda"),
-    //         estoque: formData.get("estoque"),
-    //         imagens: form["imagens"].files[0],
-    //         // imagens: formData.get("imagens"),
-    //     }
-    //     fetch(form.getAttribute("action"), {
-    //         headers: {
-    //             "Content-Type": "application/x-www-form-urlencoded",
-    //         },
-    //         body: JSON.stringify(data),
-    //         method: "put",
-    //     }).then(() => {
-    //         window.location.reload();
-    //     });
-    // });
 </script>

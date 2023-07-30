@@ -11,7 +11,6 @@
         <tr class="table-secondary">
             <th>ID</th>
             <th>Cliente</th>
-            <th>Data</th>
             <th>Produtos</th>
             <th>Ações</th>
         </tr>
@@ -19,7 +18,6 @@
             <tr>
                 <td><?php echo $pedido->id; ?></td>
                 <td><?php echo $pedido->cliente; ?></td>
-                <td><?php echo $pedido->data; ?></td>
                 <td><?php echo $pedido->countProducts(); ?></td>
                 <td class="d-flex">
                     <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#modalDelete<?php echo $pedido->id ?>">

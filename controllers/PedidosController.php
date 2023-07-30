@@ -32,7 +32,6 @@ class PedidosController extends Controller
     {
         $data = [
             "cliente"   => $_POST["cliente"],
-            "data"      => $_POST["data"],
         ];
 
         $pedido = Pedido::create($data);

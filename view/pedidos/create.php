@@ -9,11 +9,6 @@
                     <label for="cliente" class="form-label">cliente</label>
                     <input type="text" class="form-control" name="cliente" id="cliente">
                 </div>
-
-                <div class="col-4">
-                    <label for="data" class="form-label">Data</label>
-                    <input type="date" class="form-control" name="data" id="data">
-                </div>
                 
                 <div class="col-12">
                     <hr>

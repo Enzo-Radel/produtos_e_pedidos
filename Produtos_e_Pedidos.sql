@@ -20,7 +20,6 @@ CREATE TABLE imagens_de_produtos(
 CREATE TABLE pedidos (
 	id INT PRIMARY KEY AUTO_INCREMENT,
     cliente VARCHAR(255),
-    data DATE
 );
 
 CREATE TABLE pedidos_produtos (

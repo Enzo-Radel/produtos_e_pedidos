@@ -6,7 +6,7 @@ require_once __DIR__."/../DbConnection.php";
 class PedidoDAO
 {
     private string $createRelationPedidoProdutoStmt = "(?, ?, ?)";
-    private string $queryCreate = "INSERT INTO pedidos (cliente, data) VALUES (?, ?)";
+    private string $queryCreate = "INSERT INTO pedidos (cliente) VALUES (?, ?)";
     private string $queryGetAll = "SELECT * FROM pedidos";
     private string $queryGetById = "SELECT * FROM pedidos WHERE id=?;";
     private string $queryDelete = 'DELETE FROM pedidos WHERE id=?;';
@@ -20,12 +20,10 @@ class PedidoDAO
         $stmt = $conn->prepare($this->queryCreate);
 
         $cliente = $conn->real_escape_string($attributes["cliente"]);
-        $data = $attributes["data"];
 
         $stmt->bind_param(
-            "ss",
+            "s",
             $cliente,
-            $data
         );
 
         if (!$stmt->execute()) die("Error: " . $this->queryCreate . "<br>" . mysqli_error($conn));
@@ -34,7 +32,6 @@ class PedidoDAO
         $pedido = [
             "id"        => $conn->insert_id,
             "cliente"   => $cliente,
-            "data"      => $data,
         ];
 
         return $pedido;
@@ -57,7 +54,6 @@ class PedidoDAO
                 $pedido = [
                     "id"        => $registro["id"],
                     "cliente"   => $registro["cliente"],
-                    "data"      => $registro["data"],
                 ];
 
                 $pedidos[] = $pedido;
@@ -94,7 +90,6 @@ class PedidoDAO
             $pedido = [
                 "id"        => $registro["id"],
                 "cliente"   => $registro["cliente"],
-                "data"      => $registro["data"],
             ];
         }
         else

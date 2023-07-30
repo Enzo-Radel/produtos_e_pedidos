@@ -12,7 +12,6 @@ class Pedido
 {
     public $id;
     public $cliente;
-    public $data;
  
     public static function create(array $attributes)
     {
@@ -23,7 +22,6 @@ class Pedido
         $pedido = new self;
         $pedido->id         = $pedidoData["id"];
         $pedido->cliente    = $pedidoData["cliente"];
-        $pedido->data       = $pedidoData["data"];
 
         return $pedido;
     }
@@ -42,7 +40,6 @@ class Pedido
 
             $pedidoModel->id        = $pedido["id"];
             $pedidoModel->cliente   = $pedido["cliente"];
-            $pedidoModel->data      = $pedido["data"];
 
             $pedidosModel[] = $pedidoModel;
         }
@@ -60,7 +57,6 @@ class Pedido
 
         $pedido->id = $pedidoData["id"];
         $pedido->cliente = $pedidoData["cliente"];
-        $pedido->data = $pedidoData["data"];
 
         return $pedido;
     }
