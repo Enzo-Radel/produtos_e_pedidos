@@ -16,8 +16,6 @@ class Produto
     public $descricao;
     public $valorVenda;
     public $estoque;
-
-    //TODO fazer validações (mesmo id)
  
     public static function create(array $attributes)
     {
@@ -67,11 +65,15 @@ class Produto
         return $produtosModel;
     }
 
-    public static function find($id): self
+    public static function find($id): self|null
     {
         $produtoDAO = new ProdutoDAO();
 
         $produtoData = $produtoDAO->findById($id);
+
+        if (is_null($produtoData)) {
+            return null;
+        }
 
         $produto = new self;
 

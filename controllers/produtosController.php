@@ -28,6 +28,10 @@ class ProdutosController extends Controller
 
     public function store()
     {
+        if (!is_null(Produto::find($_REQUEST["id"]))) {
+            header('Location: '. "/produtos/create");
+        }
+
         $imagens = ManageImagesHelper::Upload($_FILES['imagens']);
 
         foreach ($imagens as $imagem) {
@@ -50,6 +54,11 @@ class ProdutosController extends Controller
     public function edit(int $id)
     {
         $produto = Produto::find($id);
+
+        if (is_null($produto)) {
+            header('Location: '. "/produtos");
+        }
+
         $imagens = $produto->getImages();
 
         $_REQUEST['produto'] = $produto;
