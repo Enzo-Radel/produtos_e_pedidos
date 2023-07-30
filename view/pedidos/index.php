@@ -22,7 +22,7 @@
                 <td><?php echo $pedido->data; ?></td>
                 <td><?php echo $pedido->countProducts(); ?></td>
                 <td class="d-flex">
-                    <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#modalDelete<?php echo $pedido->id ?>">
                         Excluir
                     </button>
                 </td>
@@ -32,11 +32,12 @@
     </div>
 </div>
 
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<?php foreach ($pedidos as $pedido) {?>
+<div class="modal fade" id="modalDelete<?php echo $pedido->id ?>" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Excluir Pedido</h1>
+                <h1 class="modal-title fs-5" id="modalLabel">Excluir Pedido #<?php echo $pedido->id ?></h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -51,6 +52,7 @@
         </div>
     </div>
 </div>
+<?php }?>
 
 <script>
     formsDelete = document.querySelectorAll(".form-delete");

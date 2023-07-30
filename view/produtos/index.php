@@ -15,7 +15,7 @@
             <th>Estoque</th>
             <th>Ações</th>
         </tr>
-        <?php foreach ($produtos as $produto): ?>
+        <?php foreach ($produtos as $produto){ ?>
             <tr>
                 <td><?php echo $produto->id; ?></td>
                 <td><?php echo $produto->descricao; ?></td>
@@ -23,21 +23,22 @@
                 <td><?php echo $produto->estoque; ?></td>
                 <td class="d-flex">
                     <a href="/produtos/edit/<?php echo $produto->id ?>" class="btn btn-sm btn-primary me-2">Editar</a>
-                    <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#modalDelete<?php echo $produto->id ?>">
                         Excluir
                     </button>
                 </td>
             </tr>
-        <?php endforeach; ?>
+        <?php } ?>
     </table>
     </div>
 </div>
 
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<?php foreach ($produtos as $produto) {?>
+<div class="modal fade" id="modalDelete<?php echo $produto->id ?>" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Excluir Produto</h1>
+                <h1 class="modal-title fs-5" id="modalLabel">Excluir Produto #<?php echo $produto->id ?></h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -52,6 +53,7 @@
         </div>
     </div>
 </div>
+<?php }?>
 
 <script>
     formsDelete = document.querySelectorAll(".form-delete");
