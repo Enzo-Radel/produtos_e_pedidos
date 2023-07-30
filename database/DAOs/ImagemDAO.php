@@ -93,10 +93,9 @@ class ImagemDAO
 
             $registro = $resultado->fetch_assoc();
             $produto = [
-                "id" => $registro["id"],
-                "descricao" => $registro["descricao"],
-                "valorVenda" => $registro["valor_venda"],
-                "estoque" => $registro["estoque"],
+                "id"            => $registro["id"],
+                "nome"          => $registro["nome"],
+                "produto_id"    => $registro["valor_venda"],
             ];
         }
         else

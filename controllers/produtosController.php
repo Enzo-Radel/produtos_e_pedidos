@@ -62,25 +62,18 @@ class ProdutosController extends Controller
     public function update(int $id)
     {
         $_PUT = json_decode(file_get_contents('php://input'));
-        // $imagens = UploadImageService::Execute($_FILES['imagens']);
 
-        // error_log($_PUT);
+        $produto = Produto::find($id);
 
-        foreach ($_PUT as $key => $value) {
-            error_log("key: $key | value: $value");
-        }
-        
-        // $produto = Produto::find($id);
+        $data = [];
 
-        // $data = [];
+        $data["descricao"] = $_PUT->descricao;
+        $data["valorVenda"] = $_PUT->valorVenda;
+        $data["estoque"] = $_PUT->estoque;
 
-        // $data["descricao"] = $_PUT["descricao"];
-        // $data["valorVenda"] = $_PUT["valorVenda"];
-        // $data["estoque"] = $_PUT["estoque"];
+        $produto = $produto->update($data);
 
-        // $produto = $produto->update($data);
-
-        // header('Location: '. "/produtos");
+        return;
     }
 
     public function delete(int $id)
@@ -89,6 +82,17 @@ class ProdutosController extends Controller
         $produto->delete();
 
         return;
+    }
+
+    public function images(int $id)
+    {
+        $produto = Produto::find($id);
+        $imagens = $produto->getImages();
+
+        $_REQUEST['imagens'] = $imagens;
+        $_REQUEST['product_id'] = $id;
+
+        self::view("produtos/edit_images", "Editar Produto #". $id);
     }
 }
 
