@@ -52,7 +52,7 @@
             body: JSON.stringify(data),
             method: "put",
         }).then(() => {
-            window.location.reload();
+            window.location.href = "/produtos";
         });
     });
 </script>

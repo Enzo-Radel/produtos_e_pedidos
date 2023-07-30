@@ -3,7 +3,7 @@ namespace Utils;
 
 include_once __DIR__."/../env.php";
 
-class UploadImageService
+class ManageImagesHelper
 {
     private const ALLOWED_TYPES = [
         "jpg",
@@ -11,7 +11,7 @@ class UploadImageService
         "png"
     ];
 
-    public static function Execute(mixed $file)
+    public static function Upload(mixed $file)
     {
         global $env;
 
@@ -61,5 +61,17 @@ class UploadImageService
         }
 
         return false;
+    }
+
+    public static function Delete(string $fileName)
+    {
+        $status = false;
+
+        if(file_exists($fileName))
+        {
+            $status = unlink($fileName) ? True  : False;
+        }
+
+        return $status;
     }
 }

@@ -4,16 +4,16 @@ namespace Controllers;
 require_once "controllers/Controller.php";
 require_once 'models/Imagem.php';
 
-require_once __DIR__."/../utils/UploadImageService.php";
+require_once __DIR__."/../utils/ManageImagesHelper.php";
 
 use Models\Imagem;
-use Utils\UploadImageService;
+use Utils\ManageImagesHelper;
 
 class ImagensController extends Controller
 {
     public function store(int $produto_id)
     {
-        $imagens = UploadImageService::Execute($_FILES['imagens']);
+        $imagens = ManageImagesHelper::Upload($_FILES['imagens']);
 
         foreach ($imagens as $imagem) {
             if ($imagem == null) die("ouve um erro ao fazer upload de uma imagem, verifique se está usando um desses formatos (.jpeg, .jpg, .png)");
@@ -25,15 +25,16 @@ class ImagensController extends Controller
             Imagem::create($data);
         }
 
-        header('Location: '. "/produtos");
+        header('Location: '. "/produtos/images/".$produto_id);
     }
 
     public function delete(int $id)
     {
         $imagem = Imagem::find($id);
 
-        echo "ola";
         $imagem->delete();
+
+        ManageImagesHelper::Delete($imagem->nome);
 
         return;
     }

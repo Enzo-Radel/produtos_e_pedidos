@@ -4,10 +4,10 @@ namespace Controllers;
 require_once "controllers/Controller.php";
 require_once 'models/Produto.php';
 
-require_once __DIR__."/../utils/UploadImageService.php";
+require_once __DIR__."/../utils/ManageImagesHelper.php";
 
 use Models\Produto;
-use Utils\UploadImageService;
+use Utils\ManageImagesHelper;
 
 class ProdutosController extends Controller
 {
@@ -29,7 +29,7 @@ class ProdutosController extends Controller
 
     public function store()
     {
-        $imagens = UploadImageService::Execute($_FILES['imagens']);
+        $imagens = ManageImagesHelper::Upload($_FILES['imagens']);
 
         foreach ($imagens as $imagem) {
             if ($imagem == null) die("ouve um erro ao fazer upload de uma imagem, verifique se está usando um desses formatos (.jpeg, .jpg, .png)");
