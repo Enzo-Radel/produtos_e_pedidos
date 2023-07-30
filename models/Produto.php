@@ -4,9 +4,11 @@ namespace Models;
 require_once __DIR__."/../database/DAOs/ProdutoDAO.php";
 require_once __DIR__."/../database/DAOs/ImagemDAO.php";
 require_once __DIR__."/Imagem.php";
+require_once __DIR__."/../utils/ManageImagesHelper.php";
 
 use Database\DAOs\ProdutoDAO;
 use Database\DAOs\ImagemDAO;
+use Utils\ManageImagesHelper;
 
 class Produto
 {
@@ -94,8 +96,16 @@ class Produto
     
     public function delete()
     {
-        $produtoDAO = new ProdutoDAO();
+        $imagens = $this->getImages();
+        
+        foreach ($imagens as $imagem) {
+            ManageImagesHelper::Delete($imagem->nome);
+        }
 
+        $imagemDAO = new ImagemDAO();
+        $imagemDAO->deleteByProduct($this->id);
+
+        $produtoDAO = new ProdutoDAO();
         $produtoDAO->delete($this->id);
     }
 

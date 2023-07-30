@@ -10,6 +10,7 @@ class ImagemDAO
     private string $queryGetAllByProduct = "SELECT * FROM imagens_de_produtos WHERE produto_id=?";
     private string $queryGetById = "SELECT * FROM imagens_de_produtos WHERE id=?;";
     private string $queryDelete = 'DELETE FROM imagens_de_produtos WHERE id=?;';
+    private string $queryDeleteByProduct = 'DELETE FROM imagens_de_produtos WHERE produto_id=?;';
 
     public function create(array $attributes)
     {
@@ -124,7 +125,24 @@ class ImagemDAO
         }
 
         $stmt->close();
-        
+    }
+
+    public function deleteByProduct(int $produto_id)
+    {
+        global $conn;
+
+        $stmt = $conn->prepare($this->queryDeleteByProduct);
+        $stmt->bind_param(
+            "i",
+            $produto_id
+        );
+
+        if (!$stmt->execute())
+        {
+            die("Error: " . $this->queryDeleteByProduct . "<br>" . mysqli_error($conn));
+        }
+
+        $stmt->close();
     }
 }
 
