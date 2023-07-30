@@ -3,7 +3,9 @@ namespace Controllers;
 
 require_once "controllers/Controller.php";
 require_once 'models/Pedido.php';
+require_once 'models/Produto.php';
 
+use Models\Produto;
 use Models\Pedido;
 
 class PedidosController extends Controller
@@ -20,28 +22,35 @@ class PedidosController extends Controller
 
     public function create()
     {
+        $produtos = Produto::getAll();
+        $_REQUEST['produtos'] = $produtos;
+
         self::view('pedidos/create', "Criar Pedido");
     }
 
     public function store()
     {
-        // $imagens = ManageImagesHelper::Upload($_FILES['imagens']);
+        $data = [
+            "cliente"   => $_POST["cliente"],
+            "data"      => $_POST["data"],
+        ];
 
-        // foreach ($imagens as $imagem) {
-        //     if ($imagem == null) die("ouve um erro ao fazer upload de uma imagem, verifique se está usando um desses formatos (.jpeg, .jpg, .png)");
-        // }
+        $pedido = Pedido::create($data);
 
-        // $data = [
-        //     "id"            => $_REQUEST["id"],
-        //     "descricao"    	=> $_REQUEST["descricao"],
-        //     "valorVenda"    => $_REQUEST["valorVenda"],
-        //     "estoque"		=> $_REQUEST["estoque"],
-        //     "imagens_nomes"	=> $imagens
-        // ];
+        $produtos_ids = array_keys($_POST["produtos"]);
 
-		// $produto = Produto::create($data);
+        $produtos = [];
 
-        // header('Location: '. "/produtos");
+        foreach ($produtos_ids as $produto_id) {
+            $produtos[] = [
+                "id"            => $produto_id,
+                "quantidade"    => $_POST["quantidade"][$produto_id]
+            ];
+        }
+
+        $pedido->addProducts($produtos);
+
+        header('Location: '. "/pedidos");
     }
 
     public function delete(int $id)
@@ -51,17 +60,6 @@ class PedidosController extends Controller
 
         return;
     }
-
-    // public function images(int $id)
-    // {
-    //     $produto = Produto::find($id);
-    //     $imagens = $produto->getImages();
-
-    //     $_REQUEST['imagens'] = $imagens;
-    //     $_REQUEST['product_id'] = $id;
-
-    //     self::view("produtos/edit_images", "Editar Produto #". $id);
-    // }
 }
 
 ?>

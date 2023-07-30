@@ -12,6 +12,7 @@
             <th>ID</th>
             <th>Cliente</th>
             <th>Data</th>
+            <th>Produtos</th>
             <th>Ações</th>
         </tr>
         <?php foreach ($pedidos as $pedido): ?>
@@ -19,6 +20,7 @@
                 <td><?php echo $pedido->id; ?></td>
                 <td><?php echo $pedido->cliente; ?></td>
                 <td><?php echo $pedido->data; ?></td>
+                <td><?php echo $pedido->countProducts(); ?></td>
                 <td class="d-flex">
                     <form action="/pedidos/delete/<?php echo $pedido->id ?>" method="post" class="form-delete" id="form-delete-<?php echo $pedido->id ?>" onsubmit="return confirm('Quer mesmo deleter esse pedido?');">
                         <input type="hidden" name="_method" value="delete">

@@ -2,8 +2,11 @@
 namespace Models;
 
 require_once __DIR__."/../database/DAOs/PedidoDAO.php";
+require_once __DIR__."/../database/DAOs/ProdutoDAO.php";
+require_once __DIR__."/Produto.php";
 
 use Database\DAOs\PedidoDAO;
+use Database\DAOs\ProdutoDAO;
 
 class Pedido
 {
@@ -13,27 +16,16 @@ class Pedido
  
     public static function create(array $attributes)
     {
-        // $produtoDAO = new ProdutoDAO();
-        // $imagemDAO = new ImagemDAO();
+        $pedidoDAO = new PedidoDAO();
 
-        // $produtoData = $produtoDAO->create($attributes);
+        $pedidoData = $pedidoDAO->create($attributes);
 
-        // $produto = new self;
-        // $produto->id            = $produtoData["id"];
-        // $produto->descricao     = $produtoData["descricao"];
-        // $produto->valorVenda    = $produtoData["valorVenda"];
-        // $produto->estoque       = $produtoData["estoque"];
+        $pedido = new self;
+        $pedido->id         = $pedidoData["id"];
+        $pedido->cliente    = $pedidoData["cliente"];
+        $pedido->data       = $pedidoData["data"];
 
-        // foreach ($attributes["imagens_nomes"] as $imagemNome) {
-        //     $imagemAttributes = [
-        //         "nome"          => $imagemNome,
-        //         "produto_id"    => $produto->id
-        //     ];
-
-        //     $imagemDAO->create($imagemAttributes);
-        // }
-
-        // return $produto;
+        return $pedido;
     }
 
     public static function getAll()
@@ -77,11 +69,25 @@ class Pedido
     {
         $pedidoDAO = new PedidoDAO();
 
+        $pedidoDAO->detachProducts($this->id);
+
         $pedidoDAO->delete($this->id);
     }
 
-    public function getProducts()
+    public function addProducts(array $produtos)
     {
+        $pedidoDAO = new PedidoDAO();
+
+        $pedidoData = $pedidoDAO->addProducts($this->id, $produtos);
+    }
+
+    public function countProducts()
+    {
+        $produtoDAO = new ProdutoDAO();
+
+        $produtos = $produtoDAO->getByPedidoId($this->id);
+
+        return count($produtos);
     }
 }
 

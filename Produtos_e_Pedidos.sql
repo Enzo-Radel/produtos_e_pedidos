@@ -23,13 +23,13 @@ CREATE TABLE pedidos (
     data DATE
 );
 
-CREATE TABLE produtos_pedidos (
-	produto_id INT,
+CREATE TABLE pedidos_produtos (
     pedido_id INT,
-	FOREIGN KEY (produto_id) REFERENCES produtos(id),
+    produto_id INT,
     FOREIGN KEY (pedido_id) REFERENCES pedidos(id),
+	FOREIGN KEY (produto_id) REFERENCES produtos(id),
     
     quantidade INT NOT NULL,
     
-    PRIMARY KEY(produto_id, pedido_id)
+    PRIMARY KEY(pedido_id,produto_id)
 );
