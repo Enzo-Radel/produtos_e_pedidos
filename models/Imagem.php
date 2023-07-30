@@ -26,11 +26,15 @@ class Imagem
         return $imagem;
     }
 
-    public static function find($id): self
+    public static function find($id): self|null
     {
         $imagemDAO = new ImagemDAO();
 
         $imagemData = $imagemDAO->findById($id);
+
+        if (is_null($imagemData)) {
+            return null;
+        }
 
         $imagem = new self;
 

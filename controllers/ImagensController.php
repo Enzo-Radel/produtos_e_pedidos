@@ -32,6 +32,10 @@ class ImagensController extends Controller
     {
         $imagem = Imagem::find($id);
 
+        if (is_null($imagem)) {
+            header('Location: '. "/produtos");
+        }
+
         $imagem->delete();
 
         ManageImagesHelper::Delete($imagem->nome);

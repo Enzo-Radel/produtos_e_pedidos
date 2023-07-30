@@ -87,6 +87,11 @@ class PedidoDAO
             $resultado = $stmt->get_result();
 
             $registro = $resultado->fetch_assoc();
+
+            if (is_null($registro)) {
+                return null;
+            }
+            
             $pedido = [
                 "id"        => $registro["id"],
                 "cliente"   => $registro["cliente"],

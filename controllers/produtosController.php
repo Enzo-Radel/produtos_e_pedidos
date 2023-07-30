@@ -46,7 +46,7 @@ class ProdutosController extends Controller
             "imagens_nomes"	=> $imagens
         ];
 
-		$produto = Produto::create($data);
+		Produto::create($data);
 
         header('Location: '. "/produtos");
     }
@@ -73,6 +73,10 @@ class ProdutosController extends Controller
 
         $produto = Produto::find($id);
 
+        if (is_null($produto)) {
+            header('Location: '. "/produtos");
+        }
+
         $data = [];
 
         $data["descricao"] = $_PUT->descricao;
@@ -87,6 +91,11 @@ class ProdutosController extends Controller
     public function delete(int $id)
     {
         $produto = Produto::find($id);
+
+        if (is_null($produto)) {
+            header('Location: '. "/produtos");
+        }
+
         $produto->delete();
 
         return;
@@ -95,6 +104,11 @@ class ProdutosController extends Controller
     public function images(int $id)
     {
         $produto = Produto::find($id);
+
+        if (is_null($produto)) {
+            header('Location: '. "/produtos");
+        }
+        
         $imagens = $produto->getImages();
 
         $_REQUEST['imagens'] = $imagens;

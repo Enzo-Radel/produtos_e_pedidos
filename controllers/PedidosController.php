@@ -55,6 +55,11 @@ class PedidosController extends Controller
     public function delete(int $id)
     {
         $pedido = Pedido::find($id);
+
+        if (is_null($pedido)) {
+            header('Location: '. "/pedidos");
+        }
+
         $pedido->delete();
 
         return;

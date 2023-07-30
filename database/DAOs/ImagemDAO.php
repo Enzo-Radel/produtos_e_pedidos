@@ -93,6 +93,11 @@ class ImagemDAO
             $resultado = $stmt->get_result();
 
             $registro = $resultado->fetch_assoc();
+
+            if (is_null($registro)) {
+                return null;
+            }
+            
             $produto = [
                 "id"            => $registro["id"],
                 "nome"          => $registro["nome"],

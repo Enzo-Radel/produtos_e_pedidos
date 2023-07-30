@@ -47,11 +47,15 @@ class Pedido
         return $pedidosModel;
     }
 
-    public static function find($id)
+    public static function find($id): self|null
     {
         $pedidoDAO = new PedidoDAO();
 
         $pedidoData = $pedidoDAO->findById($id);
+
+        if (is_null($pedidoData)) {
+            return null;
+        }
 
         $pedido = new self;
 
@@ -74,7 +78,7 @@ class Pedido
     {
         $pedidoDAO = new PedidoDAO();
 
-        $pedidoData = $pedidoDAO->addProducts($this->id, $produtos);
+        $pedidoDAO->addProducts($this->id, $produtos);
     }
 
     public function countProducts()
