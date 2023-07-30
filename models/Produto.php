@@ -15,7 +15,6 @@ class Produto
     public $valorVenda;
     public $estoque;
 
-    //TODO implementar imagens
     //TODO fazer validações (mesmo id)
  
     public static function create(array $attributes)
@@ -43,7 +42,7 @@ class Produto
         return $produto;
     }
 
-    public function getAll(): array
+    public static function getAll(): array
     {
         $produtoDAO = new ProdutoDAO();
 
