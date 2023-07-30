@@ -37,7 +37,7 @@ class Imagem
         return $imagem;
     }
 
-    // public function getAll(): array
+    // public static function getAll(): array
     // {
     //     $produtoDAO = new ProdutoDAO();
 

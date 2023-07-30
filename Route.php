@@ -2,6 +2,7 @@
 
 require_once "controllers/ProdutosController.php";
 require_once "controllers/ImagensController.php";
+require_once "controllers/PedidosController.php";
 
 class Route
 {

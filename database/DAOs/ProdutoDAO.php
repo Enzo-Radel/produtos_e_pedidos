@@ -11,6 +11,7 @@ class ProdutoDAO
     private string $queryGetById = "SELECT * FROM produtos WHERE id=?;";
     private string $queryUpdate = 'UPDATE produtos SET descricao=?, valor_venda=?, estoque=? WHERE id=?;';
     private string $queryDelete = 'DELETE FROM produtos WHERE id=?;';
+    private string $queryGetByPedidoId = "SELECT p.id FROM pedidos_produtos as pp, produtos as p WHERE p.id = pp.produto_id AND pedido_id = ?;";
 
     public function create(array $attributes)
     {
@@ -153,6 +154,42 @@ class ProdutoDAO
 
         $stmt->close();
         
+    }
+
+    public function getByPedidoId(int $id)
+    {
+        global $conn;
+
+        $stmt = $conn->prepare($this->queryGetByPedidoId);
+        $stmt->bind_param(
+            "i",
+            $id
+        );
+
+        $produtos = [];
+
+        if ($stmt->execute())
+        {
+            $resultado = $stmt->get_result();
+
+            while($registro = $resultado->fetch_assoc())
+            {
+                $produto = [
+                    "id" => $registro["id"],
+                ];
+
+                $produtos[] = $produto;
+            }
+        }
+        else
+        {
+            die("Error: " . $this->queryGetByPedidoId . "<br>" . mysqli_error($conn));
+        }
+
+        $stmt->close();
+        
+
+        return $produtos;
     }
 }
 

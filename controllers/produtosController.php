@@ -14,8 +14,7 @@ class ProdutosController extends Controller
 
     public function index()
     {
-        $produto = new Produto();
-        $produtos = $produto->getAll();
+        $produtos = Produto::getAll();
 
         $_REQUEST['produtos'] = $produtos;
 
