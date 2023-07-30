@@ -51,25 +51,36 @@ class ProdutosController extends Controller
     public function edit(int $id)
     {
         $produto = Produto::find($id);
+        $imagens = $produto->getImages();
 
         $_REQUEST['produto'] = $produto;
+        $_REQUEST['imagens'] = $imagens;
 
         self::view("produtos/edit", "Editar Produto #". $id);
     }
 
     public function update(int $id)
     {
-        $produto = Produto::find($id);
+        $_PUT = json_decode(file_get_contents('php://input'));
+        // $imagens = UploadImageService::Execute($_FILES['imagens']);
 
-        $data = [];
+        // error_log($_PUT);
 
-        $data["descricao"] = $_REQUEST["descricao"];
-        $data["valorVenda"] = $_REQUEST["valorVenda"];
-        $data["estoque"] = $_REQUEST["estoque"];
+        foreach ($_PUT as $key => $value) {
+            error_log("key: $key | value: $value");
+        }
+        
+        // $produto = Produto::find($id);
 
-        $produto = $produto->update($data);
+        // $data = [];
 
-        header('Location: '. "/produtos");
+        // $data["descricao"] = $_PUT["descricao"];
+        // $data["valorVenda"] = $_PUT["valorVenda"];
+        // $data["estoque"] = $_PUT["estoque"];
+
+        // $produto = $produto->update($data);
+
+        // header('Location: '. "/produtos");
     }
 
     public function delete(int $id)

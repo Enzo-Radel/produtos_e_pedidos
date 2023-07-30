@@ -3,6 +3,7 @@ namespace Models;
 
 require_once __DIR__."/../database/DAOs/ProdutoDAO.php";
 require_once __DIR__."/../database/DAOs/ImagemDAO.php";
+require_once __DIR__."/Imagem.php";
 
 use Database\DAOs\ProdutoDAO;
 use Database\DAOs\ImagemDAO;
@@ -98,13 +99,27 @@ class Produto
 
         $produtoDAO->delete($this->id);
     }
-    
-    /**
-     * ...
-     * outros métodos de abstração de banco
-     * ...
-     *
-     */
+
+    public function getImages()
+    {
+        $imagemDAO = new ImagemDAO();
+
+        $imagensData = $imagemDAO->getAllByProduct($this->id);
+
+        $imagens = [];
+
+        foreach ($imagensData as $imagemData) {
+            $imagem = new Imagem();
+
+            $imagem->id         = $imagemData["id"];
+            $imagem->nome       = $imagemData["nome"];
+            $imagem->produto_id = $imagemData["produto_id"];
+
+            $imagens[] = $imagem;
+        }
+
+        return $imagens;
+    }
 }
 
 ?>

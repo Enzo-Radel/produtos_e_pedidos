@@ -40,7 +40,6 @@
     formsDelete.forEach(form => {
         form.addEventListener("submit", (event) => {
             event.preventDefault();
-            formData = new FormData(form);
             fetch(form.getAttribute("action"), {
                 headers: {
                     "Content-Type": "application/x-www-form-urlencoded",

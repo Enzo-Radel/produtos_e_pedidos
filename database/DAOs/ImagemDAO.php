@@ -37,13 +37,17 @@ class ImagemDAO
         return $imagem;
     }
 
-    public function getAllByProduct(): array
+    public function getAllByProduct(int $product_id): array
     {
         global $conn;
 
         $stmt = $conn->prepare($this->queryGetAllByProduct);
+        $stmt->bind_param(
+            "i",
+            $product_id
+        );
 
-        $produtos = [];
+        $imagens = [];
 
         if ($stmt->execute())
         {
@@ -51,14 +55,13 @@ class ImagemDAO
 
             while($registro = $resultado->fetch_assoc())
             {
-                $produto = [
-                    "id" => $registro["id"],
-                    "descricao" => $registro["descricao"],
-                    "valorVenda" => $registro["valor_venda"],
-                    "estoque" => $registro["estoque"],
+                $imagem = [
+                    "id"            => $registro["id"],
+                    "nome"          => $registro["nome"],
+                    "produto_id"    => $registro["produto_id"],
                 ];
 
-                $produtos[] = $produto;
+                $imagens[] = $imagem;
             }
         }
         else
@@ -69,7 +72,7 @@ class ImagemDAO
         $stmt->close();
         
 
-        return $produtos;
+        return $imagens;
     }
 
     public function findById(int $id)
