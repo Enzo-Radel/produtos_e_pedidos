@@ -29,6 +29,7 @@ class ProdutosController extends Controller
     public function store()
     {
         if (!is_null(Produto::find($_REQUEST["id"]))) {
+            self::setAlert("danger", "O id ".$_REQUEST["id"]." já está cadastrado no sistema");
             header('Location: '. "/produtos/create");
         }
 
@@ -48,6 +49,7 @@ class ProdutosController extends Controller
 
 		Produto::create($data);
 
+        self::setAlert("success", "Produto cadastrado com sucesso");
         header('Location: '. "/produtos");
     }
 
@@ -56,6 +58,7 @@ class ProdutosController extends Controller
         $produto = Produto::find($id);
 
         if (is_null($produto)) {
+            self::setAlert("warning", "O id ".$_REQUEST["id"]." não existe no sistema");
             header('Location: '. "/produtos");
         }
 
@@ -74,6 +77,7 @@ class ProdutosController extends Controller
         $produto = Produto::find($id);
 
         if (is_null($produto)) {
+            self::setAlert("warning", "O id ".$_REQUEST["id"]." não existe no sistema");
             header('Location: '. "/produtos");
         }
 
@@ -85,6 +89,8 @@ class ProdutosController extends Controller
 
         $produto = $produto->update($data);
 
+        self::setAlert("success", "Produto Atualizado com sucesso");
+
         return;
     }
 
@@ -93,10 +99,13 @@ class ProdutosController extends Controller
         $produto = Produto::find($id);
 
         if (is_null($produto)) {
+            self::setAlert("warning", "O id ".$_REQUEST["id"]." não existe no sistema");
             header('Location: '. "/produtos");
         }
 
         $produto->delete();
+
+        self::setAlert("success", "Produto deletado com sucesso");
 
         return;
     }
@@ -106,6 +115,7 @@ class ProdutosController extends Controller
         $produto = Produto::find($id);
 
         if (is_null($produto)) {
+            self::setAlert("warning", "O id ".$_REQUEST["id"]." não existe no sistema");
             header('Location: '. "/produtos");
         }
         

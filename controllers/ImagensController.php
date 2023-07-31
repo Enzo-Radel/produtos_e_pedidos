@@ -25,6 +25,8 @@ class ImagensController extends Controller
             Imagem::create($data);
         }
 
+        self::setAlert("success", "Imagens cadastradas com sucesso");
+
         header('Location: '. "/produtos/images/".$produto_id);
     }
 
@@ -33,12 +35,15 @@ class ImagensController extends Controller
         $imagem = Imagem::find($id);
 
         if (is_null($imagem)) {
+            self::setAlert("warning", "O id ".$_REQUEST["id"]." não existe no sistema");
             header('Location: '. "/produtos");
         }
 
         $imagem->delete();
 
         ManageImagesHelper::Delete($imagem->nome);
+
+        self::setAlert("success", "Imagem deletada com sucesso");
 
         return;
     }

@@ -49,6 +49,8 @@ class PedidosController extends Controller
 
         $pedido->addProducts($produtos);
 
+        self::setAlert("success", "Pedido cadastrado com sucesso");
+
         header('Location: '. "/pedidos");
     }
 
@@ -57,10 +59,13 @@ class PedidosController extends Controller
         $pedido = Pedido::find($id);
 
         if (is_null($pedido)) {
+            self::setAlert("warning", "O id ".$_REQUEST["id"]." não existe no sistema");
             header('Location: '. "/pedidos");
         }
 
         $pedido->delete();
+
+        self::setAlert("success", "Pedido deletado com sucesso");
 
         return;
     }

@@ -26,6 +26,14 @@
         </div>
     </nav>
     <div class="p-2">
+
+        <?php if(isset($_REQUEST["alert"])) { ?>
+            <div class="alert alert-<?php echo $_REQUEST["alert"]["type"] ?> alert-dismissible fade show" role="alert" id="alert">
+            <?php echo $_REQUEST["alert"]["message"] ?>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        <?php } ?>
+        
         <?php include($layout["childView"]); ?>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
