@@ -1,3 +1,4 @@
+<?php $currentRoute = explode('/', $_SERVER['PATH_INFO']?? '/')[1] ?? '' ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,10 +17,10 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="/produtos/">Produtos</a>
+                        <a class="nav-link <?php if ($currentRoute == "produtos") echo "active";?>"  href="/produtos/">Produtos</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/pedidos/">Pedidos</a>
+                        <a class="nav-link <?php if ($currentRoute == "pedidos") echo "active";?>" href="/pedidos/">Pedidos</a>
                     </li>
                 </ul>
             </div>
@@ -33,8 +34,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
         <?php } ?>
-        
-        <?php include($layout["childView"]); ?>
+        <!-- <?php include($layout["childView"]); ?> -->
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
 </body>
