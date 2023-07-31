@@ -7,22 +7,22 @@
             <div class="row mb-3">
                 <div class="col-3">
                     <label for="id" class="form-label">ID</label>
-                    <input type="number" class="form-control" name="id" id="id">
+                    <input type="number" class="form-control" name="id" id="id" required>
                 </div>
 
                 <div class="col-9">
                     <label for="descricao" class="form-label">Descrição</label>
-                    <input type="text" class="form-control" name="descricao" id="descricao">
+                    <input type="text" class="form-control" name="descricao" id="descricao" required>
                 </div>
 
                 <div class="col-6">
                     <label for="valorVenda" class="form-label">Valor Venda</label>
-                    <input type="number" step="0.01" class="form-control" name="valorVenda" id="valorVenda">
+                    <input type="number" step="0.01" class="form-control" name="valorVenda" id="valorVenda" required>
                 </div>
 
                 <div class="col-6">
                     <label for="estoque" class="form-label">Estoque</label>
-                    <input type="number" class="form-control" name="estoque" id="estoque">
+                    <input type="number" class="form-control" name="estoque" id="estoque" required>
                 </div>
 
                 <div class="mt-3 col-12">

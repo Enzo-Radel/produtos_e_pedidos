@@ -13,17 +13,17 @@
 
                 <div class="col-9">
                     <label for="descricao" class="form-label">Descrição</label>
-                    <input type="text" class="form-control" name="descricao" id="descricao" value="<?php echo $_REQUEST["produto"]->descricao ?>">
+                    <input type="text" class="form-control" name="descricao" id="descricao" value="<?php echo $_REQUEST["produto"]->descricao ?>" required>
                 </div>
 
                 <div class="col-6">
                     <label for="valorVenda" class="form-label">Valor Venda</label>
-                    <input type="number" class="form-control" name="valorVenda" id="valorVenda" value="<?php echo $_REQUEST["produto"]->valorVenda ?>">
+                    <input type="number" class="form-control" name="valorVenda" id="valorVenda" value="<?php echo $_REQUEST["produto"]->valorVenda ?>" required>
                 </div>
 
                 <div class="col-6">
                     <label for="estoque" class="form-label">Estoque</label>
-                    <input type="number" class="form-control" name="estoque" id="estoque" value="<?php echo $_REQUEST["produto"]->estoque ?>">
+                    <input type="number" class="form-control" name="estoque" id="estoque" value="<?php echo $_REQUEST["produto"]->estoque ?>" required>
                 </div>
             </div>
         </div>
