@@ -1,6 +1,3 @@
-<?php
-    $produtos = $_REQUEST['produtos'];
-?>
 <div class="card">
     <div class="d-flex justify-content-between align-items-center card-header">
         <h1 class="h2"><?php echo $layout["title"] ?></h1>
@@ -15,7 +12,7 @@
             <th>Estoque</th>
             <th>Ações</th>
         </tr>
-        <?php foreach ($produtos as $produto){ ?>
+        <?php foreach ($_REQUEST['produtos'] as $produto){ ?>
             <tr>
                 <td><?php echo $produto->id; ?></td>
                 <td><?php echo $produto->descricao; ?></td>
@@ -33,7 +30,7 @@
     </div>
 </div>
 
-<?php foreach ($produtos as $produto) {?>
+<?php foreach ($_REQUEST['produtos'] as $produto) {?>
 <div class="modal fade" id="modalDelete<?php echo $produto->id ?>" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
