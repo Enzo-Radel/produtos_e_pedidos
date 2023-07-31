@@ -31,6 +31,7 @@ class ProdutosController extends Controller
         if (!is_null(Produto::find($_REQUEST["id"]))) {
             self::setAlert("danger", "O id ".$_REQUEST["id"]." já está cadastrado no sistema");
             header('Location: '. "/produtos/create");
+            die();
         }
 
         $imagens = ManageImagesHelper::Upload($_FILES['imagens']);
@@ -51,6 +52,7 @@ class ProdutosController extends Controller
 
         self::setAlert("success", "Produto cadastrado com sucesso");
         header('Location: '. "/produtos");
+        die();
     }
 
     public function edit(int $id)
@@ -60,6 +62,7 @@ class ProdutosController extends Controller
         if (is_null($produto)) {
             self::setAlert("warning", "O id ".$_REQUEST["id"]." não existe no sistema");
             header('Location: '. "/produtos");
+            die();
         }
 
         $imagens = $produto->getImages();
@@ -79,6 +82,7 @@ class ProdutosController extends Controller
         if (is_null($produto)) {
             self::setAlert("warning", "O id ".$_REQUEST["id"]." não existe no sistema");
             header('Location: '. "/produtos");
+            die();
         }
 
         $data = [];
@@ -101,6 +105,7 @@ class ProdutosController extends Controller
         if (is_null($produto)) {
             self::setAlert("warning", "O id ".$_REQUEST["id"]." não existe no sistema");
             header('Location: '. "/produtos");
+            die();
         }
 
         $produto->delete();
@@ -117,6 +122,7 @@ class ProdutosController extends Controller
         if (is_null($produto)) {
             self::setAlert("warning", "O id ".$_REQUEST["id"]." não existe no sistema");
             header('Location: '. "/produtos");
+            die();
         }
         
         $imagens = $produto->getImages();

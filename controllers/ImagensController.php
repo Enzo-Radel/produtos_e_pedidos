@@ -28,6 +28,7 @@ class ImagensController extends Controller
         self::setAlert("success", "Imagens cadastradas com sucesso");
 
         header('Location: '. "/produtos/images/".$produto_id);
+        die();
     }
 
     public function delete(int $id)
@@ -37,6 +38,7 @@ class ImagensController extends Controller
         if (is_null($imagem)) {
             self::setAlert("warning", "O id ".$_REQUEST["id"]." não existe no sistema");
             header('Location: '. "/produtos");
+            die();
         }
 
         $imagem->delete();

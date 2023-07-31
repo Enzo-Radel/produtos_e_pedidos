@@ -25,7 +25,7 @@
                                 </div>
                                 <div>
                                     <label for="quantidade[<?php echo $produto->id ?>]" class="form-label">Quantidade</label>
-                                    <input type="text" name="quantidade[<?php echo $produto->id ?>]" class="form-control" id="quantidade[<?php echo $produto->id ?>]">
+                                    <input type="number" name="quantidade[<?php echo $produto->id ?>]" class="form-control" id="quantidade[<?php echo $produto->id ?>]">
                                 </div>
                             </div>
                             <br>

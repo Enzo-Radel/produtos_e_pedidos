@@ -6,7 +6,7 @@ require_once __DIR__."/../DbConnection.php";
 class PedidoDAO
 {
     private string $createRelationPedidoProdutoStmt = "(?, ?, ?)";
-    private string $queryCreate = "INSERT INTO pedidos (cliente) VALUES (?, ?)";
+    private string $queryCreate = "INSERT INTO pedidos (cliente) VALUES (?)";
     private string $queryGetAll = "SELECT * FROM pedidos";
     private string $queryGetById = "SELECT * FROM pedidos WHERE id=?;";
     private string $queryDelete = 'DELETE FROM pedidos WHERE id=?;';
