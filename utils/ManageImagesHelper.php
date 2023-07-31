@@ -8,8 +8,20 @@ class ManageImagesHelper
     private const ALLOWED_TYPES = [
         "jpg",
         "jpeg",
-        "png"
+        "png",
+        "webp",
     ];
+
+    public static function returnAllowedTypesAsStr()
+    {
+        $allowedTypes = "";
+        foreach (self::ALLOWED_TYPES as $type) {
+            $allowedTypes .= ".$type, ";
+        }
+        $allowedTypes = substr($allowedTypes, 0, -2);
+        
+        return $allowedTypes;
+    }
 
     public static function Upload(mixed $file)
     {
@@ -42,7 +54,9 @@ class ManageImagesHelper
                 ))
                     $filesName[] = $fileName;
                 else
-                    $fileName[] = null;
+                    $filesName[] = null;
+            } else {
+                $filesName[] = null;
             }
         }
 

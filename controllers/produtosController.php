@@ -37,7 +37,12 @@ class ProdutosController extends Controller
         $imagens = ManageImagesHelper::Upload($_FILES['imagens']);
 
         foreach ($imagens as $imagem) {
-            if ($imagem == null) die("ouve um erro ao fazer upload de uma imagem, verifique se está usando um desses formatos (.jpeg, .jpg, .png)");
+            if ($imagem == null)
+            {
+                self::setAlert("danger", "Houve um erro ao fazer upload de uma imagem, verifique se está usando um desses formatos (".ManageImagesHelper::returnAllowedTypesAsStr().")");
+                header('Location: '. "/produtos/create");
+                die();
+            }
         }
 
         $data = [
