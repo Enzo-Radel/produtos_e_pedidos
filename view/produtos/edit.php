@@ -18,7 +18,7 @@
 
                 <div class="col-6">
                     <label for="valorVenda" class="form-label">Valor Venda</label>
-                    <input type="number" class="form-control" name="valorVenda" id="valorVenda" value="<?php echo $_REQUEST["produto"]->valorVenda ?>" required>
+                    <input type="number" step="0.01" class="form-control" name="valorVenda" id="valorVenda" value="<?php echo $_REQUEST["produto"]->valorVenda ?>" required>
                 </div>
 
                 <div class="col-6">
